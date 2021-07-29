@@ -1,8 +1,8 @@
 const deck = require("./assets/scripts/cards.js");
 
 console.log(deck);
-// const showCard = (cards) => {
-//   console.log(cards[0]);
-// };
+const showCard = (deck) => {
+  $(".card").attr("src", deck[0].twoClubs);
+};
 
-// showCard();
+showCard();
