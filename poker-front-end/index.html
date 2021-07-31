@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title>Poker</title>
 </head>
 <body>
-    <div>Hello welcome to the page</div>
+    <div id="root">
+        <p id="greeting">Welcome to our poker game! You ready to play Texas Hold'em</p>
+        <button>Start</button>
+        <button>Instructions</button>
+        <button id="deal">deal cards</button>
+        <div style="display: flex; justify-content: center; width: 100%;">
+            <img style="width:150px; height:200px; border: solid black 1px; border-radius:5px;" id="cardInHandOne" src="public/images/poker-cards/blue-backside.png" alt=""/>
+            <img style="width:150px; height:200px; border: solid black 1px; border-radius:5px;" id="cardInHandTwo" src="public/images/poker-cards/blue-backside.png" alt=""/>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
+
 </html>
