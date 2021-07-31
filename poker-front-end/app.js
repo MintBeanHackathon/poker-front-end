@@ -1,12 +1,9 @@
 
-$(document).ready(function () {
-  
-  
   $("#deal").on('click', function() {
     $("#cardInHandOne").attr("src", cardInHand()[0]);
     $("#cardInHandTwo").attr("src", cardInHand()[1]);
   })
-});
+
 
 // function randomCardIndex() { 
 //     const randomIndex = Math.floor(Math.random() * 52) + 1;
