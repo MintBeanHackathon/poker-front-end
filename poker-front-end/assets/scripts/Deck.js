@@ -1,6 +1,7 @@
+import Card from './Card.js'
 const SUITS = ["♠", "♣", "♥", "♦"];
 const VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-
+const dealedCard = new Array(7);
  export default class Deck {
     constructor(cards = initialDeck()) {
         this.cards = cards;
@@ -9,8 +10,12 @@ const VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
         return this.cards.length
       }
     
-      pop() {
-        return this.cards.shift()
+      dealCard() {
+        for(let i = 0 ; i <= 6; i++) {
+          
+          dealedCard[i] = this.cards.pop();
+        }
+        return dealedCard;
       }
     
       push(card) {
@@ -24,24 +29,6 @@ const VALUES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"
           this.cards[newIndex] = this.cards[i]
           this.cards[i] = oldValue
         }
-      }
-}
-
-class Card {
-    constructor(suit, value) {
-        this.suit = suit;
-        this.value = value
-    }
-    get color() {
-        return this.suit === "♣" || this.suit === "♠" ? "black" : "red"
-      }
-    
-      getHTML() {
-        const cardDiv = document.createElement("div")
-        cardDiv.innerText = this.suit
-        cardDiv.classList.add("card", this.color)
-        cardDiv.dataset.value = `${this.value} ${this.suit}`
-        return cardDiv
       }
 }
 

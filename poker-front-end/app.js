@@ -1,18 +1,41 @@
-import Deck from './Deck.js';
-
+import Deck from './assets/scripts/Deck.js'
+import Player from './assets/scripts/Player.js'
 const deck = new Deck();
-deck.shuffle();
-
-console.log(deck.cards);
-
-
+const player = new Player();
+const computer = new Player("computer");
+const communityCard = new Array(3);
 
 
+$(".startButton").on('click', function() {
+    deck.shuffle();
+    $('.section').css({"display":"none"});
+    $('.section_game').css({"display":"block"});
+})
 
+$("#dealCard").on('click', function() {
+    const cardArr = deck.dealCard();
+    console.log(cardArr)
+    player.cardInHand[0] = cardArr[0];
+    player.cardInHand[1] = cardArr[1];
+    computer.cardInHand[0] = cardArr[2];
+    computer.cardInHand[1] = cardArr[3];
+    communityCard[0] = cardArr[5];
+    communityCard[1] = cardArr[6];
+    communityCard[2] = cardArr[7];
+    console.log(player);
+    console.log(computer);
 
-
-
-
+        $('#0').append(`<div>${player.cardInHand[0].value}</div>`)
+        $('#0').append(`<div>${player.cardInHand[0].suit}</div>`)
+        $('#0').append(`<div>${player.cardInHand[0].value}</div>`)
+     
+  
+        $('#1').append(`<div>${player.cardInHand[1].value}</div>`)
+        $('#1').append(`<div>${player.cardInHand[1].suit}</div>`)
+        $('#1').append(`<div>${player.cardInHand[1].value}</div>`)
+    
+    
+})
 
 
 
