@@ -1,6 +1,7 @@
-import Deck from './assets/scripts/Deck.js';
+import Deck from './Deck.js';
 
 const deck = new Deck();
+deck.shuffle();
 
 console.log(deck.cards);
 
