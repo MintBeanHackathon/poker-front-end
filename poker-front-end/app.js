@@ -33,6 +33,7 @@ $(".startButton").on('click', function() {
 startGame();
 document.addEventListener("click", () => {
     text.innerText = "Click Anywhere to Play"
+   
     if (stop) {
       startGame()
       return
@@ -54,7 +55,6 @@ function startGame() {
     computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
     inRound = false
     stop = false
-  
     cleanBeforeRound()
   }
   
@@ -62,7 +62,6 @@ function cleanBeforeRound() {
     inRound = false
     computerCardSlot.innerHTML = ""
     playerCardSlot.innerHTML = ""
-  
     updateDeckCount()
   }
   
@@ -74,24 +73,46 @@ function cleanBeforeRound() {
   
     playerCardSlot.appendChild(playerCard.getHTML())
     computerCardSlot.appendChild(computerCard.getHTML())
-  
+    console.log(computerCardSlot, "card slot for computer")
     updateDeckCount()
   
+    text.innerText = "You got the card"
     if (isRoundWinner(playerCard, computerCard) === 'win') {
-      text.innerText = "You got the card"
-      playerDeck.push(playerCard)
-      playerDeck.push(computerCard)
+       if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
+        let toCon = playerWarDeck.concat(comWarDeck);
+        console.log(toCon)
+        for(const card of toCon)
+            playerDeck.push(card);
+        playerWarDeck = [];
+        comWarDeck = [];
+        console.log(playerDeck, "playerDeck after concat")
+        } else {
+            playerDeck.push(playerCard)
+            playerDeck.push(computerCard)
+        }
+      
     } else if (isRoundWinner(computerCard, playerCard) === 'war') {
         text.innerText = "War!"
         playerDeck.push(playerCard)
         computerDeck.push(computerCard)
-        // if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4)
-        //warAction();
+        if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4){
+            warAction();
+        }
     } else {
-        text.innerText = "You lost the card"
-      computerDeck.push(playerCard)
-      computerDeck.push(computerCard)
-      
+    text.innerText = "You lost the card"
+    if(comWarDeck.length > 0 && playerWarDeck.length > 0){
+    let toCon = playerWarDeck.concat(comWarDeck);
+    console.log(toCon)
+        for(const card of toCon)
+            computerDeck.push(card); 
+            console.log(computerDeck, "computerDeck after concat")
+            playerWarDeck = [];
+            comWarDeck = [];
+    } else {
+        computerDeck.push(playerCard)
+        computerDeck.push(computerCard)
+    }
+    console.log(computerDeck, computerDeck.length, "computer deck after won the war")
     }
     if (isGameOver(playerDeck)) {
       text.innerText = "You Lose!!"
@@ -101,7 +122,7 @@ function cleanBeforeRound() {
       stop = true
     }
   }
-  
+
   function updateDeckCount() {
     computerDeckElement.innerText = computerDeck.numberOfCards
     playerDeckElement.innerText = playerDeck.numberOfCards
@@ -120,55 +141,38 @@ function cleanBeforeRound() {
     return deck.numberOfCards === 0
   }
 
-// function warAction () {
-//     for(let i = 0; i < 4;i++) {
-//         playerWarDeck[i] = playerDeck.pop();
-//         comWarDeck[i]= playerDeck.pop();;
-//     }
-//     if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'win'){
-//         let toCon = playerWarDeck.concat(comWarDeck);
-//         for(const card of toCon)
-//             playerDeck.push(card);
+function warAction () {
+        for(let i = 0; i < 4;i++) {
+        playerWarDeck[i] = playerDeck.pop();
+        comWarDeck[i]= playerDeck.pop();;
+        }
+        console.log(comWarDeck, playerWarDeck)
+    return
+ }
 
-//         playerWarDeck = [];
-//         comWarDeck = [];
-//         console.log(toCon)
-//         console.log(playerDeck)
-//         return
-//     } else if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'lose'){
-//         let toCon = playerWarDeck.concat(comWarDeck);
-//         for(const card of toCon)
-//             computerDeck.push(card);
+
+
+
+ // if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'win'){
+    //     let toCon = playerWarDeck.concat(comWarDeck);
+    //     for(const card of toCon)
+    //         playerDeck.push(card);
+
+    //     playerWarDeck = [];
+    //     comWarDeck = [];
+    //     console.log(toCon)
+    //     console.log(playerDeck)
+    //     return
+    // } else if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'lose'){
+    //     let toCon = playerWarDeck.concat(comWarDeck);
+    //     for(const card of toCon)
+    //         computerDeck.push(card);
             
-//         playerWarDeck = [];
-//         comWarDeck = [];
-//         console.log(toCon)
-//         console.log(computerDeck)
-//         return
-//     } else {
-//         warAction();
-//     }
-//  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //     playerWarDeck = [];
+    //     comWarDeck = [];
+    //     console.log(toCon)
+    //     console.log(computerDeck)
+    //     return
+    // } else {
+    //     warAction();
+    // }
