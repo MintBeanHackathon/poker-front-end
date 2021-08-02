@@ -13,6 +13,10 @@ const dealedCard = new Array(7);
       dealCard() {
         return this.cards.card
       }
+
+      pop() {
+        return this.cards.shift()
+      }
     
       push(card) {
         this.cards.push(card)
@@ -25,6 +29,13 @@ const dealedCard = new Array(7);
           this.cards[newIndex] = this.cards[i]
           this.cards[i] = oldValue
         }
+      }
+      getHTML() {
+        const cardDiv = document.createElement("div")
+        cardDiv.innerText = this.suit
+        cardDiv.classList.add("card", this.color)
+        cardDiv.dataset.value = `${this.value} ${this.suit}`
+        return cardDiv
       }
 }
 

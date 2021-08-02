@@ -1,10 +1,13 @@
 import Deck from './assets/scripts/Deck.js'
 import Player from './assets/scripts/Player.js'
 const deck = new Deck();
-const computerDeckElement = document.getElementById('5')
-const playerDeckElement = document.getElementById("0")
+const computerDeckElement = document.getElementById('5');
+const playerDeckElement = document.getElementById("0");
+const computerCardSlot = document.getElementById("6");
+const playerCardSlot = document.getElementById("1");
+const text = document.querySelector(".text");
 
-//let playerDeck, computerDeck
+let playerDeck, computerDeck
 
 $(".startButton").on('click', function() {
     deck.shuffle();
@@ -16,20 +19,49 @@ $("#dealCard").on('click', function() {
     const cardArr = deck.dealCard();
     updateDeckCount()
 
+
 })
 
 const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
-const playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
-const computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
+playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
+computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
 
 function updateDeckCount() {
     computerDeckElement.innerText = computerDeck.numberOfCards
     playerDeckElement.innerText = playerDeck.numberOfCards
 }
-console.log( playerDeck, " this is player")
-console.log( computerDeck, "this is computer")
 
-console.log(computerDeckElement.innerText)
+function flipCards() {
+    const computerCard = computerDeck.pop()
+    const playerCard = playerDeck.pop()
+
+    playerCardSlot.appendChild(playerCard.getHTML())
+    computerCardSlot.appendChild(computerCard.getHTML())
+
+    if (isRoundWinner(playerCard, computerCard)) {
+        text.innerText = "Win"
+        playerDeck.push(playerCard)
+        playerDeck.push(computerCard)
+    } else if (isRoundWinner(computerCard, playerCard)) {
+        text.innerText = "Lose"
+        computerDeck.push(playerCard)
+        computerDeck.push(computerCard)
+    } else {
+        text.innerText = "Draw"
+        playerDeck.push(playerCard)
+        computerDeck.push(computerCard)
+    }
+
+    if (isGameOver(playerDeck)) {
+        text.innerText = "You Lose!!"
+        stop = true
+    } else if (isGameOver(computerDeck)) {
+        text.innerText = "You Win!!"
+        stop = true
+    }
+}
+
+flipCards()
 
 
 
