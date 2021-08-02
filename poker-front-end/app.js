@@ -73,12 +73,12 @@ function cleanBeforeRound() {
   
     playerCardSlot.appendChild(playerCard.getHTML())
     computerCardSlot.appendChild(computerCard.getHTML())
-    console.log(computerCardSlot, "card slot for computer")
+   
     if (isRoundWinner(playerCard, computerCard) === 'win') {
         text.innerText = "You got the card"
-        console.log(comWarDeck.length, playerWarDeck.length)
+       
         if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
-            console.log(comWarDeck.numberOfCards, playerWarDeck.numberOfCards )
+           
             let toCon = playerWarDeck.concat(comWarDeck);
             for(const card of toCon)
                 playerDeck.push(card);
@@ -93,7 +93,7 @@ function cleanBeforeRound() {
         text.innerText = "War!"
         playerDeck.push(playerCard)
         computerDeck.push(computerCard)
-        console.log(playerDeck.numberOfCards, computerDeck.numberOfCards )
+       
         if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4){
             warAction();
         } 
@@ -147,33 +147,9 @@ function warAction () {
         playerWarDeck[i] = playerDeck.pop();
         comWarDeck[i]= computerDeck.pop();;
         }
-        console.log(comWarDeck, playerWarDeck)
+       
     return
  }
 
 
 
-
- // if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'win'){
-    //     let toCon = playerWarDeck.concat(comWarDeck);
-    //     for(const card of toCon)
-    //         playerDeck.push(card);
-
-    //     playerWarDeck = [];
-    //     comWarDeck = [];
-    //     console.log(toCon)
-    //     console.log(playerDeck)
-    //     return
-    // } else if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'lose'){
-    //     let toCon = playerWarDeck.concat(comWarDeck);
-    //     for(const card of toCon)
-    //         computerDeck.push(card);
-            
-    //     playerWarDeck = [];
-    //     comWarDeck = [];
-    //     console.log(toCon)
-    //     console.log(computerDeck)
-    //     return
-    // } else {
-    //     warAction();
-    // }
