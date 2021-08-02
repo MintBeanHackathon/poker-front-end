@@ -33,17 +33,20 @@ body::after {
 .header-container {
 	display: flex;
 	justify-content: center;
+	position: relative;
 }
 .header {
 	text-align: center;
 	padding-top: 5rem;
+	position: relative;
+	z-index: 1;
 }
 .container {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	max-width: 1200px;
+	/* max-width: 1200px; */
 	flex-wrap: wrap;
 	z-index: 1;
 }

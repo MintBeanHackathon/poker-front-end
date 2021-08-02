@@ -85,7 +85,7 @@ function cleanBeforeRound() {
         text.innerText = "War!"
         playerDeck.push(playerCard)
         computerDeck.push(computerCard)
-        if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4)
+        // if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4)
         //warAction();
     } else {
         text.innerText = "You lost the card"
