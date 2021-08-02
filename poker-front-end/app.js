@@ -1,11 +1,10 @@
 import Deck from './assets/scripts/Deck.js'
 import Player from './assets/scripts/Player.js'
 const deck = new Deck();
-const player = new Player();
-const computer = new Player("computer");
-const communityCard = new Array(3);
+const computerDeckElement = document.getElementById('5')
+const playerDeckElement = document.getElementById("0")
 
-let playerDeck, computerDeck
+//let playerDeck, computerDeck
 
 $(".startButton").on('click', function() {
     deck.shuffle();
@@ -13,28 +12,24 @@ $(".startButton").on('click', function() {
     $('.section_game').css({"display":"block"});
 })
 
-const computerDeckElement = document.querySelector('#5');
-const playerDeckElement = document.querySelector('#0');
+$("#dealCard").on('click', function() {
+    const cardArr = deck.dealCard();
+    updateDeckCount()
 
-// $("#dealCard").on('click', function() {
-    
-
-
-// })
+})
 
 const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
-    playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
-    computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
+const playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
+const computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
 
 function updateDeckCount() {
     computerDeckElement.innerText = computerDeck.numberOfCards
     playerDeckElement.innerText = playerDeck.numberOfCards
 }
+console.log( playerDeck, " this is player")
+console.log( computerDeck, "this is computer")
 
-
-
-
-
+console.log(computerDeckElement.innerText)
 
 
 

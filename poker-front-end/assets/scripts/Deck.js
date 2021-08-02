@@ -6,8 +6,8 @@ const dealedCard = new Array(7);
     constructor(cards = initialDeck()) {
         this.cards = cards;
     }
-    get numberOfCards() {
-        return this.cards.length
+   get numberOfCards() {
+        return this.cards.length;
       }
     
       dealCard() {
