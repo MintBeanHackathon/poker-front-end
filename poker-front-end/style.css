@@ -169,6 +169,11 @@ body::after {
 	backdrop-filter: blur(5px);
 }
 
+#buttonContainer {
+	font-size: 4em;
+	margin-top: .25em;
+}
+
 .value{
 	color: white;
 	font-size: 3rem;

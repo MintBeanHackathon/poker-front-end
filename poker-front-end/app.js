@@ -5,6 +5,7 @@ const player = new Player();
 const computer = new Player("computer");
 const communityCard = new Array(3);
 
+let playerDeck, computerDeck
 
 $(".startButton").on('click', function() {
     deck.shuffle();
@@ -12,30 +13,24 @@ $(".startButton").on('click', function() {
     $('.section_game').css({"display":"block"});
 })
 
-$("#dealCard").on('click', function() {
-    const cardArr = deck.dealCard();
-    console.log(cardArr)
-    player.cardInHand[0] = cardArr[0];
-    player.cardInHand[1] = cardArr[1];
-    computer.cardInHand[0] = cardArr[2];
-    computer.cardInHand[1] = cardArr[3];
-    communityCard[0] = cardArr[5];
-    communityCard[1] = cardArr[6];
-    communityCard[2] = cardArr[7];
-    console.log(player);
-    console.log(computer);
+const computerDeckElement = document.querySelector('#5');
+const playerDeckElement = document.querySelector('#0');
 
-        $('#0').append(`<div>${player.cardInHand[0].value}</div>`)
-        $('#0').append(`<div>${player.cardInHand[0].suit}</div>`)
-        $('#0').append(`<div>${player.cardInHand[0].value}</div>`)
-     
-  
-        $('#1').append(`<div>${player.cardInHand[1].value}</div>`)
-        $('#1').append(`<div>${player.cardInHand[1].suit}</div>`)
-        $('#1').append(`<div>${player.cardInHand[1].value}</div>`)
+// $("#dealCard").on('click', function() {
     
-    
-})
+
+
+// })
+
+const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
+    playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
+    computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
+
+function updateDeckCount() {
+    computerDeckElement.innerText = computerDeck.numberOfCards
+    playerDeckElement.innerText = playerDeck.numberOfCards
+}
+
 
 
 

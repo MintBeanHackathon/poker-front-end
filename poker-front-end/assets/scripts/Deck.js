@@ -11,11 +11,7 @@ const dealedCard = new Array(7);
       }
     
       dealCard() {
-        for(let i = 0 ; i <= 6; i++) {
-          
-          dealedCard[i] = this.cards.pop();
-        }
-        return dealedCard;
+        return this.cards.card
       }
     
       push(card) {
