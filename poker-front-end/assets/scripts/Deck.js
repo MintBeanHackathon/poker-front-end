@@ -1,6 +1,6 @@
 import Card from './Card.js'
 const SUITS = ["♠", "♣", "♥", "♦"];
-const VALUES = ["2", "3", "4", "5", "6", "7", "8", "9"];
+const VALUES = ["2", "3", "4", "5", "6", "7", "8", "9","10","J","Q","K","A"];
 const dealedCard = new Array(7);
  export default class Deck {
     constructor(cards = initialDeck()) {

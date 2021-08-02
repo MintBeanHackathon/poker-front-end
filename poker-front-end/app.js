@@ -15,10 +15,10 @@ const CARD_VALUE_MAP = {
     "8": 8,
     "9": 9,
     "10": 10,
-    J: 11,
-    Q: 12,
-    K: 13,
-    A: 14
+    "J": 11,
+    "Q": 12,
+    "K": 13,
+    "A": 14
   }
 let comWarDeck = new Array(4);
 let playerWarDeck = new Array(4);
