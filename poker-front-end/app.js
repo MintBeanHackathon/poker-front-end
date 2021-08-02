@@ -24,14 +24,15 @@ let comWarDeck = new Array(4);
 let playerWarDeck = new Array(4);
 let playerDeck, computerDeck, inRound, stop
 
-$(".startButton").on('click', function() {
-
+$(".startButton").on('click', function(e) {
+    e.stopPropagation();
     $('.section').css({"display":"none"});
     $('.section_game').css({"display":"block"});
     
 })
 startGame();
-document.addEventListener("click", () => {
+const target = document.querySelector('.section_game')
+target.addEventListener("click", () => {
     text.innerText = "Click Anywhere to Play"
    
     if (stop) {
@@ -67,57 +68,56 @@ function cleanBeforeRound() {
   
   function flipCards() {
     inRound = true
-  
     const playerCard = playerDeck.pop()
     const computerCard = computerDeck.pop()
   
     playerCardSlot.appendChild(playerCard.getHTML())
     computerCardSlot.appendChild(computerCard.getHTML())
     console.log(computerCardSlot, "card slot for computer")
-    updateDeckCount()
-  
-    text.innerText = "You got the card"
     if (isRoundWinner(playerCard, computerCard) === 'win') {
-       if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
-        let toCon = playerWarDeck.concat(comWarDeck);
-        console.log(toCon)
-        for(const card of toCon)
-            playerDeck.push(card);
-        playerWarDeck = [];
-        comWarDeck = [];
-        console.log(playerDeck, "playerDeck after concat")
-        } else {
-            playerDeck.push(playerCard)
-            playerDeck.push(computerCard)
-        }
-      
-    } else if (isRoundWinner(computerCard, playerCard) === 'war') {
+        text.innerText = "You got the card"
+        console.log(comWarDeck.length, playerWarDeck.length)
+        if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
+            console.log(comWarDeck.numberOfCards, playerWarDeck.numberOfCards )
+            let toCon = playerWarDeck.concat(comWarDeck);
+            for(const card of toCon)
+                playerDeck.push(card);
+            playerWarDeck = [];
+            comWarDeck = [];
+            text.innerText = "You got 4 cards"
+            } else {
+                playerDeck.push(playerCard)
+                playerDeck.push(computerCard)
+             }
+    } else if (isRoundWinner(playerCard,computerCard) === 'war') {
         text.innerText = "War!"
         playerDeck.push(playerCard)
         computerDeck.push(computerCard)
+        console.log(playerDeck.numberOfCards, computerDeck.numberOfCards )
         if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4){
             warAction();
-        }
-    } else {
-    text.innerText = "You lost the card"
-    if(comWarDeck.length > 0 && playerWarDeck.length > 0){
-    let toCon = playerWarDeck.concat(comWarDeck);
-    console.log(toCon)
+        } 
+    } else if (isRoundWinner(playerCard,computerCard) === 'lose'){
+        text.innerText = "You lost the card"
+        if(comWarDeck.length > 0 && playerWarDeck.length > 0){
+        text.innerText = "You lost 4 cards"
+        let toCon = playerWarDeck.concat(comWarDeck);
         for(const card of toCon)
             computerDeck.push(card); 
-            console.log(computerDeck, "computerDeck after concat")
-            playerWarDeck = [];
-            comWarDeck = [];
+        playerWarDeck = [];
+        comWarDeck = [];
     } else {
         computerDeck.push(playerCard)
         computerDeck.push(computerCard)
     }
-    console.log(computerDeck, computerDeck.length, "computer deck after won the war")
     }
+    
     if (isGameOver(playerDeck)) {
+    updateDeckCount()
       text.innerText = "You Lose!!"
       stop = true
     } else if (isGameOver(computerDeck)) {
+    updateDeckCount()
       text.innerText = "You Win!!"
       stop = true
     }
@@ -134,7 +134,7 @@ function cleanBeforeRound() {
     else if(CARD_VALUE_MAP[cardOne.value] < CARD_VALUE_MAP[cardTwo.value])
         return "lose"
     else
-        return 'war'
+        return "war"
   }
   
   function isGameOver(deck) {
@@ -142,9 +142,10 @@ function cleanBeforeRound() {
   }
 
 function warAction () {
+    inRound = true;
         for(let i = 0; i < 4;i++) {
         playerWarDeck[i] = playerDeck.pop();
-        comWarDeck[i]= playerDeck.pop();;
+        comWarDeck[i]= computerDeck.pop();;
         }
         console.log(comWarDeck, playerWarDeck)
     return
