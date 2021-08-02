@@ -1,166 +1,174 @@
-import Deck from './assets/scripts/Deck.js'
-import Player from './assets/scripts/Player.js'
+import Deck from './assets/scripts/Deck.js';
 const deck = new Deck();
-const computerDeckElement = document.getElementById('5');
-const playerDeckElement = document.getElementById("0");
-const computerCardSlot = document.getElementById("6");
-const playerCardSlot = document.getElementById("1");
-const text = document.querySelector(".text");
-
-let playerDeck, computerDeck
+const computerCardSlot = document.querySelector(".computer-card-slot")
+const playerCardSlot = document.querySelector(".player-card-slot")
+const computerDeckElement = document.querySelector(".computer-deck")
+const playerDeckElement = document.querySelector(".player-deck")
+const text = document.querySelector(".text")
+const CARD_VALUE_MAP = {
+    "2": 2,
+    "3": 3,
+    "4": 4,
+    "5": 5,
+    "6": 6,
+    "7": 7,
+    "8": 8,
+    "9": 9,
+    "10": 10,
+    J: 11,
+    Q: 12,
+    K: 13,
+    A: 14
+  }
+let comWarDeck = new Array(4);
+let playerWarDeck = new Array(4);
+let playerDeck, computerDeck, inRound, stop
 
 $(".startButton").on('click', function() {
-    deck.shuffle();
+
     $('.section').css({"display":"none"});
     $('.section_game').css({"display":"block"});
+    
 })
+startGame();
+document.addEventListener("click", () => {
+    text.innerText = "Click Anywhere to Play"
+    if (stop) {
+      startGame()
+      return
+    }
+  
+    if (inRound) {
+      cleanBeforeRound()
+    } else {
+      flipCards()
+    }
+  })
 
-$("#dealCard").on('click', function() {
-    const cardArr = deck.dealCard();
+function startGame() {
+    const deck = new Deck()
+    deck.shuffle()
+  
+    const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
+    playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
+    computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
+    inRound = false
+    stop = false
+  
+    cleanBeforeRound()
+  }
+  
+function cleanBeforeRound() {
+    inRound = false
+    computerCardSlot.innerHTML = ""
+    playerCardSlot.innerHTML = ""
+  
     updateDeckCount()
-
-
-})
-
-const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
-playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
-computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
-
-function updateDeckCount() {
-    computerDeckElement.innerText = computerDeck.numberOfCards
-    playerDeckElement.innerText = playerDeck.numberOfCards
-}
-
-function flipCards() {
-    const computerCard = computerDeck.pop()
+  }
+  
+  function flipCards() {
+    inRound = true
+  
     const playerCard = playerDeck.pop()
-
+    const computerCard = computerDeck.pop()
+  
     playerCardSlot.appendChild(playerCard.getHTML())
     computerCardSlot.appendChild(computerCard.getHTML())
-
-    if (isRoundWinner(playerCard, computerCard)) {
-        text.innerText = "Win"
+  
+    updateDeckCount()
+  
+    if (isRoundWinner(playerCard, computerCard) === 'win') {
+      text.innerText = "You got the card"
+      playerDeck.push(playerCard)
+      playerDeck.push(computerCard)
+    } else if (isRoundWinner(computerCard, playerCard) === 'war') {
+        text.innerText = "War!"
         playerDeck.push(playerCard)
-        playerDeck.push(computerCard)
-    } else if (isRoundWinner(computerCard, playerCard)) {
-        text.innerText = "Lose"
-        computerDeck.push(playerCard)
         computerDeck.push(computerCard)
+        if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4)
+        //warAction();
     } else {
-        text.innerText = "Draw"
-        playerDeck.push(playerCard)
-        computerDeck.push(computerCard)
+        text.innerText = "You lost the card"
+      computerDeck.push(playerCard)
+      computerDeck.push(computerCard)
+      
     }
-
     if (isGameOver(playerDeck)) {
-        text.innerText = "You Lose!!"
-        stop = true
+      text.innerText = "You Lose!!"
+      stop = true
     } else if (isGameOver(computerDeck)) {
-        text.innerText = "You Win!!"
-        stop = true
+      text.innerText = "You Win!!"
+      stop = true
     }
-}
+  }
+  
+  function updateDeckCount() {
+    computerDeckElement.innerText = computerDeck.numberOfCards
+    playerDeckElement.innerText = playerDeck.numberOfCards
+  }
+  
+  function isRoundWinner(cardOne, cardTwo) {
+    if(CARD_VALUE_MAP[cardOne.value] > CARD_VALUE_MAP[cardTwo.value])
+        return "win"
+    else if(CARD_VALUE_MAP[cardOne.value] < CARD_VALUE_MAP[cardTwo.value])
+        return "lose"
+    else
+        return 'war'
+  }
+  
+  function isGameOver(deck) {
+    return deck.numberOfCards === 0
+  }
 
-flipCards()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   $("#deal").on('click', function() {
-//     $("#cardInHandOne").attr("src", cardInHand()[0]);
-//     $("#cardInHandTwo").attr("src", cardInHand()[1]);
-//   })
-//  $('#root').html("Hello World!");
-
-// // function randomCardIndex() { 
-// //     const randomIndex = Math.floor(Math.random() * 52) + 1;
-// //     return randomIndex;
-// // }
-
-// let randomRange = 52;
-// function cardInHand() {
-    
-//     const randomIndex1 = Math.floor(Math.random() * randomRange + 1);
-//     let randomIndex2 = Math.floor(Math.random() * randomRange + 1);
-
-//     while(randomIndex1 === randomIndex2) {
-//         randomIndex2 = Math.floor(Math.random() * randomRange + 1);   
+// function warAction () {
+//     for(let i = 0; i < 4;i++) {
+//         playerWarDeck[i] = playerDeck.pop();
+//         comWarDeck[i]= playerDeck.pop();;
 //     }
+//     if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'win'){
+//         let toCon = playerWarDeck.concat(comWarDeck);
+//         for(const card of toCon)
+//             playerDeck.push(card);
 
-//     const card1 = cards[randomIndex1];
-//     const card2 = cards[randomIndex2];
-//     cards[randomIndex1] = null;
-//     cards[randomIndex2] = null;
-//     const newCards = cards.filter(card => card !== null);
-//     cards = [...newCards];
-//     if(randomRange<0) return;
-//     randomRange -= 2;
-//     return [card1,card2];
-// }
+//         playerWarDeck = [];
+//         comWarDeck = [];
+//         console.log(toCon)
+//         console.log(playerDeck)
+//         return
+//     } else if(isRoundWinner(playerWarDeck[playerWarDeck.length - 1], comWarDeck[comWarDeck.length - 1]) === 'lose'){
+//         let toCon = playerWarDeck.concat(comWarDeck);
+//         for(const card of toCon)
+//             computerDeck.push(card);
+            
+//         playerWarDeck = [];
+//         comWarDeck = [];
+//         console.log(toCon)
+//         console.log(computerDeck)
+//         return
+//     } else {
+//         warAction();
+//     }
+//  }
 
-// calculateValue = (cardInHand[], cardOnTable[]) => {
-//     // calculates value for whatever cards are in hand or on table
-//     // table points + hand points
-//     // return sum
-//     // hold five cards
-//     // if royal flush, you get the highest points
-//     // add points to 10
-//     // if one pair, you get the seond lowest points
-//     // if
-//     // write conditionals for points for players
-//     // function is for one player
-//     // pass their cards (card object) here to calculate
-// }
 
-// const SUITS = ["♠", "♣", "♥", "♦"]
 
-// write function where return value from calculateValue is compared with returned
 
-// insert = (index) => {
-//     // takes a cards index and puts card at specific index
-//     // if it goes in the hand, write logic
-//     // else if it goes on the table, write logic
-// }
 
-// moveCard = (card(obj), comingFrom, goingTo) => {
-//     // if card moves to your hand, recalculate its index
-//     // if card moves to the table, recalculate its index
-// }
 
-// $('#root').html("<div><img src='rectangle.jpeg'></div>")
 
-// function displayCard() {
-// show card on table or in the hand
-// show card when card is on the table
-// take cardsToShow parameter
-// EXAMPLE $('#root').html("<p>hi</p>");
-// manipulate the DOM to display card in its proper spot (table or hand)
-// }
-// displayCard()
 
-// removeCard = (cardObject) => {
-//     // splice the deck array when a card is drawn
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

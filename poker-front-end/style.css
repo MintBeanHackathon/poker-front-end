@@ -139,7 +139,7 @@ body::after {
 	color: white;
 }
 
-.cardGame {
+.player-deck, .computer-deck, .player-card-slot, .computer-card-slot{
 	width: 200px;
 	height: 320px;
 }
@@ -151,7 +151,7 @@ body::after {
 	width: 100%;
 }
 
-.container .cardGame {
+.container .player-deck, .computer-deck, .player-card-slot, .computer-card-slot {
 	position: relative;
 	width: 200px;
 	height: 320px;
@@ -173,25 +173,48 @@ body::after {
 	font-size: 4em;
 	margin-top: .25em;
 }
-
-.value{
-	color: white;
-	font-size: 3rem;
-	align-self: flex-start;
-	padding-left: 20px;
-
-}
-.suit {
-	color: white;
+.innerCard {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	border: 1px solid black;
+	border-radius: .5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 8rem;
-}
-
-.value.upSideDown {
-	align-self: flex-end;
-	-moz-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
-	
-}
+  }
+  
+  .innerCard.red {
+	color: red;
+  }
+  
+  .innerCard.black {
+	color: white;
+  }
+  
+  .innerCard::before,
+  .innerCard::after {
+	position: absolute;
+	content: attr(data-value);
+	font-size: 2rem;
+  }
+  
+  .innerCard::before {
+	top: .8rem;
+	left: .8rem
+  }
+  
+  .innerCard::after {
+	bottom: .8rem;
+	right: .8rem;
+	transform: rotate(180deg);
+  }
+  .text {
+	  position: relative;
+	  width: 100%;
+	  text-align: center;
+	  font-size: 5rem;
+	  color: white;
+	  z-index:5;
+  }
