@@ -4,12 +4,14 @@
 	box-sizing: border-box;
 	font-family: "poppins";
 }
+
 .section {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background: #161623;
 }
+
 body::before {
 	content: "";
 	position: absolute;
@@ -20,6 +22,7 @@ body::before {
 	background: linear-gradient(#f00, #f0f);
 	clip-path: circle(30% at right 70%);
 }
+
 body::after {
 	content: "";
 	position: absolute;
@@ -30,26 +33,29 @@ body::after {
 	background: linear-gradient(#2196f3, #e91e63);
 	clip-path: circle(20% at 10% 10%);
 }
+
 .header-container {
 	display: flex;
 	justify-content: center;
 	position: relative;
 }
+
 .header {
 	text-align: center;
 	padding-top: 5rem;
 	position: relative;
 	z-index: 1;
 }
+
 .container {
 	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* max-width: 1200px; */
 	flex-wrap: wrap;
 	z-index: 1;
 }
+
 .container .card {
 	position: relative;
 	width: 280px;
@@ -66,6 +72,7 @@ body::after {
 	border-left: 1px solid rgba(255, 255, 255, 0.5);
 	backdrop-filter: blur(5px);
 }
+
 .container .card .content {
 	padding: 20px;
 	text-align: center;
@@ -73,10 +80,12 @@ body::after {
 	transition: 0.5s;
 	opacity: 0;
 }
+
 .container .card:hover .content {
 	transform: translateY(0px);
 	opacity: 1;
 }
+
 .container .card .content h2 {
 	position: absolute;
 	top: -80px;
@@ -85,16 +94,19 @@ body::after {
 	color: rgba(255, 255, 255, 0.5);
 	pointer-events: none;
 }
+
 .container .card .content h3 {
 	font-size: 1.8em;
 	color: #fff;
 	z-index: 1;
 }
+
 .container .card .content p {
 	font-size: 1em;
 	color: #fff;
 	font-weight: 300;
 }
+
 .container .card .content a {
 	position: relative;
 	display: inline-block;
@@ -131,6 +143,12 @@ body::after {
 	width: 9.5em;
 }
 
+.section_about {
+	display: none;
+	background: #161623;
+	min-height: 100vh;
+}
+
 .section_game {
 	display:none;
 	justify-content: center;
@@ -138,6 +156,7 @@ body::after {
 	min-height: 100vh;
 	background: #161623;
 }
+
 .suit{
 	color: white;
 }
@@ -145,6 +164,12 @@ body::after {
 .player-deck, .computer-deck, .player-card-slot, .computer-card-slot{
 	width: 200px;
 	height: 320px;
+}
+
+.player-deck,
+.computer-deck {
+	color: #fff;
+	font-size: 2rem;
 }
 
 .cardInhand {
@@ -176,6 +201,7 @@ body::after {
 	font-size: 4em;
 	margin-top: .25em;
 }
+
 .innerCard {
 	position: relative;
 	height: 100%;
@@ -186,38 +212,39 @@ body::after {
 	justify-content: center;
 	align-items: center;
 	font-size: 8rem;
-  }
-  
-  .innerCard.red {
+}
+
+.innerCard.red {
 	color: red;
-  }
-  
-  .innerCard.black {
+}
+
+.innerCard.black {
 	color: white;
-  }
-  
-  .innerCard::before,
-  .innerCard::after {
+}
+
+.innerCard::before,
+.innerCard::after {
 	position: absolute;
 	content: attr(data-value);
 	font-size: 2rem;
-  }
-  
-  .innerCard::before {
+}
+
+.innerCard::before {
 	top: .8rem;
 	left: .8rem
-  }
-  
-  .innerCard::after {
+}
+
+.innerCard::after {
 	bottom: .8rem;
 	right: .8rem;
 	transform: rotate(180deg);
-  }
-  .text {
-	  position: relative;
-	  width: 100%;
-	  text-align: center;
-	  font-size: 5rem;
-	  color: white;
-	  z-index:5;
-  }
+}
+
+.text {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	font-size: 5rem;
+	color: white;
+	z-index:5;
+}

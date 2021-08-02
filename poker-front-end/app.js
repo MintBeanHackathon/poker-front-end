@@ -24,6 +24,15 @@ let comWarDeck = new Array(4);
 let playerWarDeck = new Array(4);
 let playerDeck, computerDeck, inRound, stop
 
+$(".aboutButton").on('click', function() {
+
+  $('.section').css({"display":"none"});
+  $('.section_about').css({"display":"block"});
+  document.querySelector('.header').innerText ="Meet the Team";
+  
+})
+
+
 $(".startButton").on('click', function() {
 
     $('.section').css({"display":"none"});
