@@ -29,6 +29,7 @@ $(".aboutButton").on('click', function(e) {
   $('.section').css({"display":"none"});
   $('.section_about').css({"display":"block"});
   
+  
 })
 
 $(".startButton").on('click', function(e) {
