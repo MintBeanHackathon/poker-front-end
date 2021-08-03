@@ -1,5 +1,3 @@
-
-
 export function handlePlayAgainButton () {
     $('.modal').removeClass('is-visible')
     $('.container').css({"display":"flex"});
@@ -27,3 +25,21 @@ export function handlePlayAgainButton () {
     $('.section_game').css({"display":"block"});
     
 }
+
+export function handleAboutButton (e) {
+  $(".aboutButton").on('click', function(e) {
+    e.stopPropagation();
+    $('.section').css({"display":"none"});
+    $('.section_about').css({"display":"block"});
+    document.querySelector(".header").innerText = "Meet the Team";
+  })
+}
+
+  export function handleInstructionsButton (e) {
+    $(".instructionsButton").on('click', function(e) {
+      e.stopPropagation();
+      $('.section').css({"display":"none"});
+      $('.section_instructions').css({"display":"block"});
+      document.querySelector(".header").innerText = "How does War work?";
+    })
+  }

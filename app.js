@@ -1,5 +1,5 @@
 import Deck from './assets/scripts/Deck.js';
-import {handlePlayAgainButton, modalPopup, handleExitGameButton, handleStartGameButton} from './assets/scripts/ui.js';
+import {handlePlayAgainButton, modalPopup, handleExitGameButton, handleStartGameButton, handleInstructionsButton, handleAboutButton} from './assets/scripts/ui.js';
 const computerCardSlot = document.querySelector(".computer-card-slot")
 const playerCardSlot = document.querySelector(".player-card-slot")
 const computerDeckElement = document.querySelector(".computer-deck")
@@ -162,3 +162,6 @@ $('#play-again-btn').on('click', handlePlayAgainButton)
 
 $('#exit-btn').on('click', handleExitGameButton)
 
+$('.instructionsButton').on('click', handleInstructionsButton)
+
+$('.aboutButton').on('click', handleAboutButton)
