@@ -24,6 +24,13 @@ let comWarDeck = new Array(4);
 let playerWarDeck = new Array(4);
 let playerDeck, computerDeck, inRound, stop
 
+$(".aboutButton").on('click', function(e) {
+  e.stopPropagation();
+  $('.section').css({"display":"none"});
+  $('.section_about').css({"display":"block"});
+  
+})
+
 $(".startButton").on('click', function(e) {
     e.stopPropagation();
     $('.section').css({"display":"none"});
