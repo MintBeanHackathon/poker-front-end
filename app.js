@@ -4,6 +4,7 @@ const computerCardSlot = document.querySelector(".computer-card-slot")
 const playerCardSlot = document.querySelector(".player-card-slot")
 const computerDeckElement = document.querySelector(".computer-deck")
 const playerDeckElement = document.querySelector(".player-deck")
+const target = document.querySelector('.section_game')
 const text = document.querySelector(".text");
 
 const CARD_VALUE_MAP = {
@@ -12,22 +13,25 @@ const CARD_VALUE_MAP = {
     "4": 4,
     "5": 5,
     "6": 6,
-     "7":7, 
-     "8":8,
-      "9": 9,
-      "10": 10,
-      "J": 11,
-      "Q": 12,
-      "K": 13,
-      "A": 14
+    "7":7, 
+    "8":8,
+    "9": 9,
+    "10": 10,
+    "J": 11,
+    "Q":12,
+    "K": 13,
+    "A":14  
   }
+
 let comWarDeck = [];
 let playerWarDeck = [];
 let playerDeck, computerDeck, inRound, stop
 
 $(".startButton").on('click', handleStartGameButton)
+
 startGame();
-const target = document.querySelector('.section_game')
+
+
 target.addEventListener("click", () => {
     text.innerText = "Click Anywhere to Play"
    
@@ -43,23 +47,23 @@ target.addEventListener("click", () => {
   })
 
 function startGame() {
-    const deck = new Deck()
-    deck.shuffle()
+  const deck = new Deck()
+  deck.shuffle()
   
-    const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
-    playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
-    computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
-    inRound = false
-    stop = false
-    cleanBeforeRound()
-  }
+  const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
+  playerDeck = new Deck(deck.cards.slice(0, deckMidpoint))
+  computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
+  inRound = false
+  stop = false
+  cleanBeforeRound()
+}
   
 function cleanBeforeRound() {
     inRound = false
     computerCardSlot.innerHTML = ""
     playerCardSlot.innerHTML = ""
     updateDeckCount()
-  }
+}
   
   function flipCards() {
     inRound = true
@@ -72,6 +76,7 @@ function cleanBeforeRound() {
     if (isRoundWinner(playerCard, computerCard) === 'win') {
       playerDeck.push(playerCard)
       playerDeck.push(computerCard)
+
         if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
           text.innerText = `You got ${comWarDeck.length + 1} cards`
             let toCon = playerWarDeck.concat(comWarDeck);
@@ -103,9 +108,9 @@ function cleanBeforeRound() {
       text.innerText = "You lost the card"
         
     }
-    }
+  }
     
-    if (isGameOver(playerDeck)) {
+  if (isGameOver(playerDeck)) {
     updateDeckCount()
       text.innerText = "You Lose!!"
       modalPopup("You Lose!!");
@@ -153,9 +158,7 @@ function warAction () {
     return
  }
 
-
-
 $('#play-again-btn').on('click', handlePlayAgainButton)
 
-$('#exist-btn').on('click', handleExitGameButton)
+$('#exit-btn').on('click', handleExitGameButton)
 

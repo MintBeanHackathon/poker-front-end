@@ -1,6 +1,4 @@
-export const displayCard = (card, displayStatus) => {
-$('.value').text()
-} 
+
 
 export function handlePlayAgainButton () {
     $('.modal').removeClass('is-visible')
@@ -17,12 +15,14 @@ export function handlePlayAgainButton () {
   }
 
   export function handleExitGameButton() {
-    $('.modal-heading').text("Bye");
-    $('#exist-btn').hide();
+    $('.section').css({"display":"block"});
+    $('.container').css({"display":"flex"});
+    $('.section_game').css({"display":"none"});
   }
 
   export function handleStartGameButton (e) {
     e.stopPropagation();
+    $('.modal').removeClass('is-visible');
     $('.section').css({"display":"none"});
     $('.section_game').css({"display":"block"});
     
