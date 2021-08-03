@@ -1,10 +1,11 @@
 import Deck from './assets/scripts/Deck.js';
-const deck = new Deck();
+import {handlePlayAgainButton, modalPopup, handleExitGameButton, handleStartGameButton} from './assets/scripts/ui.js';
 const computerCardSlot = document.querySelector(".computer-card-slot")
 const playerCardSlot = document.querySelector(".player-card-slot")
 const computerDeckElement = document.querySelector(".computer-deck")
 const playerDeckElement = document.querySelector(".player-deck")
-const text = document.querySelector(".text")
+const text = document.querySelector(".text");
+
 const CARD_VALUE_MAP = {
     "2": 2,
     "3": 3,
@@ -24,12 +25,7 @@ let comWarDeck = [];
 let playerWarDeck = [];
 let playerDeck, computerDeck, inRound, stop
 
-$(".startButton").on('click', function(e) {
-    e.stopPropagation();
-    $('.section').css({"display":"none"});
-    $('.section_game').css({"display":"block"});
-    
-})
+$(".startButton").on('click', handleStartGameButton)
 startGame();
 const target = document.querySelector('.section_game')
 target.addEventListener("click", () => {
@@ -74,19 +70,18 @@ function cleanBeforeRound() {
     computerCardSlot.appendChild(computerCard.getHTML())
    
     if (isRoundWinner(playerCard, computerCard) === 'win') {
+      playerDeck.push(playerCard)
+      playerDeck.push(computerCard)
         if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
-          text.innerText = `You got ${comWarDeck.length} cards`
+          text.innerText = `You got ${comWarDeck.length + 1} cards`
             let toCon = playerWarDeck.concat(comWarDeck);
             for(const card of toCon)
                 playerDeck.push(card);
             playerWarDeck = [];
             comWarDeck = [];
-            playerDeck.push(playerCard)
-            playerDeck.push(computerCard)
             } else {
               text.innerText = "You got the card"
-                playerDeck.push(playerCard)
-                playerDeck.push(computerCard)
+               
              }
     } else if (isRoundWinner(playerCard,computerCard) === 'war') {
         text.innerText = "War!"
@@ -95,19 +90,18 @@ function cleanBeforeRound() {
         if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4)
             warAction(); 
     } else if (isRoundWinner(playerCard,computerCard) === 'lose'){
+      computerDeck.push(playerCard)
+        computerDeck.push(computerCard)
         if(comWarDeck.length > 0 && playerWarDeck.length > 0){
-          text.innerText = `You lost ${playerWarDeck.length} cards`
+          text.innerText = `You lost ${playerWarDeck.length + 1} cards`
         let toCon = playerWarDeck.concat(comWarDeck);
         for(const card of toCon)
             computerDeck.push(card); 
         playerWarDeck = [];
         comWarDeck = [];
-        computerDeck.push(playerCard)
-        computerDeck.push(computerCard)
     } else {
       text.innerText = "You lost the card"
-        computerDeck.push(playerCard)
-        computerDeck.push(computerCard)
+        
     }
     }
     
@@ -159,22 +153,9 @@ function warAction () {
     return
  }
 
-function modalPopup(text) {
-  $('.modal').toggleClass('is-visible');
-  $('.modal-heading').text(text);
-  $('.container').css({"display":"none"});
-  $('.text').css({"display":"none"});
-  $('#exist-btn').show();
-}
 
-$('#play-again-btn').on('click', function() {
-  $('.modal').removeClass('is-visible')
-  $('.container').css({"display":"flex"});
-  $('.text').text('Click Anywhere to Play').css({"display":"block"});
-})
 
-$('#exist-btn').on('click', function() {
-  $('.modal-heading').text("Bye");
-  $('#exist-btn').hide();
-})
+$('#play-again-btn').on('click', handlePlayAgainButton)
+
+$('#exist-btn').on('click', handleExitGameButton)
 
