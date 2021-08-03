@@ -28,7 +28,7 @@ $(".aboutButton").on('click', function(e) {
   e.stopPropagation();
   $('.section').css({"display":"none"});
   $('.section_about').css({"display":"block"});
-  
+  document.querySelector(".header").innerText = "Meet the Team";
 })
 
 $(".startButton").on('click', function(e) {
@@ -171,7 +171,7 @@ function modalPopup(text) {
   $('.modal-heading').text(text);
   $('.container').css({"display":"none"});
   $('.text').css({"display":"none"});
-  $('#exist-btn').show();
+  $('#exit-btn').show();
 }
 
 $('#play-again-btn').on('click', function() {
@@ -180,7 +180,14 @@ $('#play-again-btn').on('click', function() {
   $('.text').text('Click Anywhere to Play').css({"display":"block"});
 })
 
-$('#exist-btn').on('click', function() {
+$('#exit-btn').on('click', function() {
   $('.modal-heading').text("Bye");
-  $('#exist-btn').hide();
+  $('#exit-btn').hide();
+})
+
+$(".instructionsButton").on('click', function(e) {
+  e.stopPropagation();
+  $('.section').css({"display":"none"});
+  $('.section_instructions').css({"display":"block"});
+  document.querySelector(".header").innerText = "How does War work?";
 })

@@ -40,17 +40,17 @@
 		<div class="modal">
 			<div class="modal-overlay modal-toggle"></div>
 			<div class="modal-wrapper modal-transition">
-			  <div class="modal-header">
+				<div class="modal-header">
 				<h2 class="modal-heading"></h2>
-			  </div>
-			  <div class="modal-body">
-				<div class="modal-content">
-				  <button class="modal-toggle" id="play-again-btn">Play Again</button>
-				  <button class="modal-toggle" id="exist-btn">Exist Game</button>
-				</div>
-			  </div>
 			</div>
-		  </div>
+			<div class="modal-body">
+				<div class="modal-content">
+					<button class="modal-toggle" id="play-again-btn">Play Again</button>
+					<button class="modal-toggle" id="exit-btn">Exit Game</button>
+				</div>
+			</div>
+			</div>
+		</div>
 		
 			<div class="container">
 				<div class="player-deck"></div>
@@ -100,8 +100,25 @@
 					</a>
 				</div>
 			</div>
+			<div class="card teamPageCard" id="start-card">
+				<div class="content">
+					<h3>Win or lose bring your A game!</h3>
+					<button class="startButton button">Start</button>
+				</div>
+			</div>
 		</div>
 	</section>
+
+	<section class="section section_instructions">
+		<div class="container">
+			<div class="card">
+				<div class="content">
+					<h4 class="instructions">The player and computer draw one card, the card with the highest value wins. If you and the computer draw the same card, war breaks out-you each put down three cards and the value of the forth determines who wins that battle. It's a fight to whoevers deck is empty first!</h4>
+					<button class="startButton button">Start</button>	
+				</div>
+			</div>
+	</section>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="vanilla-tilt.js"></script>
 	<script src="app.js" type="module"></script>

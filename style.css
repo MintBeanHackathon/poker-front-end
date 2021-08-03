@@ -178,6 +178,12 @@ body::after {
 	width: 64px;
 }
 
+.teamPageCard {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .section_game {
 	display:none;
 	justify-content: center;
@@ -407,3 +413,7 @@ body::after {
   cursor: pointer;
 }
 
+.instructions {
+	color: #fff;
+	font-size: 1.3em;
+}
