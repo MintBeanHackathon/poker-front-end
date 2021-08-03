@@ -11,14 +11,14 @@ const CARD_VALUE_MAP = {
     "4": 4,
     "5": 5,
     "6": 6,
-    "7": 7,
-    "8": 8,
-    "9": 9,
-    "10": 10,
-    "J": 11,
-    "Q": 12,
-    "K": 13,
-    "A": 14
+     "7":7, 
+     "8":8,
+      "9": 9,
+      "10": 10,
+      "J": 11,
+      "Q": 12,
+      "K": 13,
+      "A": 14
   }
 let comWarDeck = [];
 let playerWarDeck = [];
@@ -39,7 +39,6 @@ target.addEventListener("click", () => {
       startGame()
       return
     }
-  
     if (inRound) {
       cleanBeforeRound()
     } else {
@@ -115,12 +114,15 @@ function cleanBeforeRound() {
     if (isGameOver(playerDeck)) {
     updateDeckCount()
       text.innerText = "You Lose!!"
+      modalPopup("You Lose!!");
       stop = true
     } else if (isGameOver(computerDeck)) {
     updateDeckCount()
       text.innerText = "You Win!!"
+      modalPopup("You Win!!");
       stop = true
     }
+    
   }
 
   function updateDeckCount() {
@@ -157,5 +159,21 @@ function warAction () {
     return
  }
 
+function modalPopup(text) {
+  $('.modal').toggleClass('is-visible');
+  $('.modal-heading').text(text);
+  $('.container').css({"display":"none"});
+  $('.text').css({"display":"none"});
+  $('#exist-btn').show();
+}
 
+$('#play-again-btn').on('click', function() {
+  $('.modal').removeClass('is-visible')
+  $('.container').css({"display":"flex"});
+  $('.text').text('Click Anywhere to Play').css({"display":"block"});
+})
 
+$('#exist-btn').on('click', function() {
+  $('.modal-heading').text("Bye");
+  $('#exist-btn').hide();
+})
