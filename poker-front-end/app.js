@@ -177,3 +177,4 @@ $('#exist-btn').on('click', function() {
   $('.modal-heading').text("Bye");
   $('#exist-btn').hide();
 })
+
