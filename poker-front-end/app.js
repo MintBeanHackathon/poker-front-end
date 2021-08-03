@@ -20,8 +20,8 @@ const CARD_VALUE_MAP = {
     "K": 13,
     "A": 14
   }
-let comWarDeck = new Array(4);
-let playerWarDeck = new Array(4);
+let comWarDeck = [];
+let playerWarDeck = [];
 let playerDeck, computerDeck, inRound, stop
 
 $(".startButton").on('click', function(e) {
@@ -75,17 +75,17 @@ function cleanBeforeRound() {
     computerCardSlot.appendChild(computerCard.getHTML())
    
     if (isRoundWinner(playerCard, computerCard) === 'win') {
-        text.innerText = "You got the card"
-       
         if(comWarDeck.length > 0 && playerWarDeck.length > 0) {
-           
+          text.innerText = `You got ${comWarDeck.length} cards`
             let toCon = playerWarDeck.concat(comWarDeck);
             for(const card of toCon)
                 playerDeck.push(card);
             playerWarDeck = [];
             comWarDeck = [];
-            text.innerText = "You got 4 cards"
+            playerDeck.push(playerCard)
+            playerDeck.push(computerCard)
             } else {
+              text.innerText = "You got the card"
                 playerDeck.push(playerCard)
                 playerDeck.push(computerCard)
              }
@@ -93,20 +93,20 @@ function cleanBeforeRound() {
         text.innerText = "War!"
         playerDeck.push(playerCard)
         computerDeck.push(computerCard)
-       
-        if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4){
-            warAction();
-        } 
+        if(playerDeck.numberOfCards > 4 && computerDeck.numberOfCards > 4)
+            warAction(); 
     } else if (isRoundWinner(playerCard,computerCard) === 'lose'){
-        text.innerText = "You lost the card"
         if(comWarDeck.length > 0 && playerWarDeck.length > 0){
-        text.innerText = "You lost 4 cards"
+          text.innerText = `You lost ${playerWarDeck.length} cards`
         let toCon = playerWarDeck.concat(comWarDeck);
         for(const card of toCon)
             computerDeck.push(card); 
         playerWarDeck = [];
         comWarDeck = [];
+        computerDeck.push(playerCard)
+        computerDeck.push(computerCard)
     } else {
+      text.innerText = "You lost the card"
         computerDeck.push(playerCard)
         computerDeck.push(computerCard)
     }
@@ -143,11 +143,17 @@ function cleanBeforeRound() {
 
 function warAction () {
     inRound = true;
-        for(let i = 0; i < 4;i++) {
-        playerWarDeck[i] = playerDeck.pop();
-        comWarDeck[i]= computerDeck.pop();;
+    let i = 0;
+    let cCard = {};
+    let pCard = {};
+    
+        while(i < 4) {
+          cCard = computerDeck.pop();
+          pCard = playerDeck.pop();
+          playerWarDeck.push(pCard)
+          comWarDeck.push(cCard);
+          i++;
         }
-       
     return
  }
 
