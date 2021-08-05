@@ -85,7 +85,8 @@ function cleanBeforeRound() {
             playerWarDeck = [];
             comWarDeck = [];
             } else {
-              text.innerText = "You got the card"
+              text.innerText = "Congrats You got the card" 
+              // document.getElementById("won").style.visibility= "visible"
                
              }
     } else if (isRoundWinner(playerCard,computerCard) === 'war') {

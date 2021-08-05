@@ -45,6 +45,11 @@ body::after {
 	padding-top: 5rem;
 	position: relative;
 	z-index: 1;
+	background-color: #161623;;
+	color: #fff;
+	padding-bottom: 1.5rem;
+	font-size: 2.3rem;
+	backdrop-filter: blur(5px);
 }
 
 .container {
@@ -70,7 +75,7 @@ body::after {
 	align-items: center;
 	border-top: 1px solid rgba(255, 255, 255, 0.5);
 	border-left: 1px solid rgba(255, 255, 255, 0.5);
-	backdrop-filter: blur(5px);
+	backdrop-filter: blur(2px);
 }
 
 .container .card .content {
@@ -90,7 +95,7 @@ body::after {
 	position: absolute;
 	top: -80px;
 	right: 30px;
-	font-size: 8em;
+	font-size: 8rem;
 	color: rgba(255, 255, 255, 0.5);
 	pointer-events: none;
 }
@@ -106,6 +111,7 @@ body::after {
 	color: #fff;
 	font-weight: 300;
 }
+
 
 .container .card .content a {
 	position: relative;

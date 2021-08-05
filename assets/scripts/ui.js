@@ -23,6 +23,8 @@ export function handlePlayAgainButton () {
     $('.modal').removeClass('is-visible');
     $('.section').css({"display":"none"});
     $('.section_game').css({"display":"block"});
+    $('.section_about').css({"display":"none"});
+    document.querySelector(".header").innerText = "Welcome to war! Are you ready to play?";
     
 }
 
